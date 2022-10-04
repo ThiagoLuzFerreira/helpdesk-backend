@@ -29,7 +29,6 @@ public enum Perfil {
                 return x;
             }
         }
-
         throw new IllegalArgumentException("Perfil inválido");
     }
 }
