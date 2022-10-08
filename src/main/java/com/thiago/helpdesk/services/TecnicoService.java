@@ -11,6 +11,7 @@ import com.thiago.helpdesk.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -36,6 +37,14 @@ public class TecnicoService {
         objDto.setId(null);
         validarPorCpfEEmail(objDto);
         return repository.save(new Tecnico(objDto));
+    }
+
+    public Tecnico update(Integer id, @Valid TecnicoDTO objDto) {
+        objDto.setId(id);
+        Tecnico obj = findById(id);
+        validarPorCpfEEmail(objDto);
+        obj = new Tecnico(objDto);
+        return repository.save(obj);
     }
 
     private void validarPorCpfEEmail(TecnicoDTO objDto) {
