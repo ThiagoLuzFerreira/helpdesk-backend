@@ -1,6 +1,7 @@
 package com.thiago.helpdesk.services;
 
 import com.thiago.helpdesk.domain.Tecnico;
+import com.thiago.helpdesk.domain.dtos.TecnicoDTO;
 import com.thiago.helpdesk.repositories.TecnicoRepository;
 import com.thiago.helpdesk.resources.TecnicoResource;
 import org.springframework.beans.factory.annotation.Autowired;
