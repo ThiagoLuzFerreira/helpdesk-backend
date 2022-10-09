@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 
 import javax.validation.Valid;
 import java.sql.PreparedStatement;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -45,6 +46,13 @@ public class ChamadoService {
         return repository.save(newChamado(objDto));
     }
 
+    public Chamado update(Integer id, ChamadoDTO objDto) {
+        objDto.setId(id);
+        Chamado obj = findById(id);
+        obj = newChamado(objDto);
+        return repository.save(obj);
+    }
+
     private Chamado newChamado(ChamadoDTO obj){
         Tecnico tecnico = tecnicoService.findById(obj.getTecnico());
         Cliente cliente = clienteService.findById(obj.getCliente());
@@ -52,6 +60,10 @@ public class ChamadoService {
         Chamado chamado = new Chamado();
         if(obj.getId() != null){
             chamado.setId(obj.getId());
+        }
+
+        if(obj.getStatus().equals(2)) {
+            chamado.setDataFechamento(LocalDate.now());
         }
 
         chamado.setTecnico(tecnico);
